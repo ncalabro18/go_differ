@@ -45,11 +45,12 @@ func TestBacktrack(t *testing.T) {
 }
 
 func TestTrace(t *testing.T) {
-
+	assert := assert.New(t)
+	expectedData := [][]int{[]int{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, []int{2, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0}, []int{2, 5, 3, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 2, 4}, []int{5, 5, 7, 5, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 4, 4}}
 
 	trace := Trace([]byte("ABCABBA"), []byte("CBABAC"))
-	t.Logf("%v\n", trace)
-	t.Logf("%v\n", len(trace[0]))
+
+	assert.Equal(expectedData, trace, "expected Trace data not equal to results")
 }
 
 func TestRevAssignment(t *testing.T) {
