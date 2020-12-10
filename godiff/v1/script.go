@@ -8,7 +8,7 @@ func RunScript(f1, s []byte) []byte {
 	fIndex := 0
 	i := 0
 
-	for i < len(s) - 1{
+	for i < len(s) {
 		b0 := s[i]
 
 		if b0 == '+' {
