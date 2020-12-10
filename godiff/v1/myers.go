@@ -14,14 +14,16 @@ func Backtrack(f1, f2 []byte) [][]int {
 	for d := len(t) - 1; d >= 0; d-- {
 		v := t[d]
 		k := x - y
+		vkp1 := revValue(v, k+1)
+		vkm1 := revValue(v, k-1)
 
-		if k == -d || (k != d && v[k-1] < v[k+1]) {
+		if k == -d || (k != d && vkm1 < vkp1) {
 			kprev = k + 1
 		} else {
 			kprev = k - 1
 		}
 
-		xprev := v[kprev]
+		xprev := revValue(v, kprev)
 		yprev := xprev - kprev
 		for x > xprev && y > yprev {
 			retArray = append(retArray, []int{x - 1, y - 1, x, y})
