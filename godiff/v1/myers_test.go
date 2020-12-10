@@ -6,9 +6,10 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestBacktrack(t *testing.T) {
-	assert := assert.New(t)
-	expected := [][]int{
+var (
+	dataF1        = "ABCABBA"
+	dataF2        = "CBABAC"
+	dataBacktrack = [][]int{
 		[]int{
 			7, 5, 7, 6,
 		},
@@ -37,11 +38,15 @@ func TestBacktrack(t *testing.T) {
 			0, 0, 1, 0,
 		},
 	}
+)
 
-	steps := Backtrack([]byte("ABCABBA"), []byte("CBABAC"))
+func TestBacktrack(t *testing.T) {
+	assert := assert.New(t)
+
+	steps := Backtrack([]byte(dataF1), []byte(dataF2))
 	//t.Logf("%v\n", steps)
 
-	assert.Equal(expected, steps, "godiff.Backtrack results not correct")
+	assert.Equal(dataBacktrack, steps, "godiff.Backtrack results not correct")
 }
 
 func TestTrace(t *testing.T) {
