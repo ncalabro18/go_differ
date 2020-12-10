@@ -45,6 +45,7 @@ func TestScriptStringTable(t *testing.T) {
 		f1 := []byte(dataStrings[i])
 		f2 := []byte(dataStrings[i+1])
 
+		Backtrack = backtrack
 		script := GenScript(f1, f2)
 		result := RunScript(f1, script)
 
@@ -61,6 +62,7 @@ func TestScriptRandomized(t *testing.T) {
 		testf1 := randByteArray()
 		testf2 := randByteArray()
 
+		Backtrack = backtrack
 		script := GenScript(testf1, testf2)
 		result := RunScript(testf1, script)
 
