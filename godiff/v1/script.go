@@ -16,12 +16,16 @@ func RunScript(f1, s []byte) []byte {
 
 			i += 2
 		} else if b0 == '_' {
-			result = append(result, f1[fIndex])
+			if fIndex < len(f1) {
+				result = append(result, f1[fIndex])
+			}
 			i++
 			fIndex++
 		} else if b0 == '-' {
 			i++
 			fIndex++
+		} else {
+			i++
 		}
 	}
 	return result
@@ -32,10 +36,15 @@ func GenScript(f1, f2 []byte) []byte {
 	script := []byte{}
 	steps := Backtrack(f1, f2)
 	for i := len(steps) - 1; i >= 0; i-- {
+		var opBytes []byte
 		s := NewStep(steps[i])
 
 		f2Index := steps[i][1]
-		opBytes := s.Operation(f2[f2Index])
+		if f2Index < len(f2) {
+			opBytes = s.Operation(f2[f2Index])
+		} else {
+			opBytes = s.Operation(byte(0))
+		}
 		script = append(script, opBytes...)
 	}
 
