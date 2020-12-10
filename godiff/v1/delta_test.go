@@ -13,7 +13,7 @@ func TestSaveLoadDelta(t *testing.T) {
 	assert := assert.New(t)
 	rand.Seed(time.Now().Unix())
 
-	path := "../../test/data/save_load_test.delta"
+	path := ".save_load_test.delta"
 
 	for i := 0; i < 20; i++ {
 		f1 := randByteArray()
