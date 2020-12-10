@@ -8,15 +8,16 @@ var (
 func GenScript(f1, f2 []byte, steps [][]int) []byte {
 	script := append([]byte{}, scriptHeader...)
 
-	for i := len(steps) - 1; i > 0; i-- {
-		var s Step
+	for i := len(steps) - 1; i >= 0; i-- {
+		var opData []byte
+		s := NewStep(steps[i])
 		if s.R == '+' {
-			s = NewStep(steps[i], f2[steps[i][1]])
+			opData = s.Op(f2[steps[i][1]])
 		} else {
-			s = NewStep(steps[i], f1[steps[i][0]])
+			opData = s.Op(f1[steps[i][0]])
 		}
 
-		opData := s.Op()
+
 		script = append(script, opData...)
 	}
 
@@ -28,15 +29,13 @@ type Step struct {
 	yInc bool
 	xInc bool
 	R    rune
-	Data byte
 }
 
-func NewStep(step []int, data byte) Step {
+func NewStep(step []int) Step {
 	s := Step{
 		Step: step,
 		xInc: step[0] < step[2],
 		yInc: step[1] < step[3],
-		Data: data,
 	}
 	s.R = s.OpRune()
 	return s
@@ -53,7 +52,7 @@ func (s *Step) OpRune() rune {
 	return ' '
 }
 
-func (s *Step) Op() []byte {
+func (s *Step) Op(data byte) []byte {
 	b := []byte(string(s.R))
-	return []byte{b[0], s.Data}
+	return []byte{b[0], data}
 }
