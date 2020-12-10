@@ -2,40 +2,41 @@ package godiff
 
 
 //RunScript takes a generated script from GenScript and returns the result with the deltas included
-func RunScript(s []byte) []byte {
-	var b0, b1 byte
+func RunScript(f1, s []byte) []byte {
 
 	result := []byte{}
+	fIndex := 0
+	i := 0
 
-	for i := 0; i < len(s); i += 2 {
-		b0 = s[i]
-		b1 = s[i + 1]
+	for i < len(s) - 1{
+		b0 := s[i]
 
 		if b0 == '+' {
-			result = append(result, b1)
-		} else if b0 == ' ' {
-			result = append(result, b1)
+			result = append(result, s[i+1])
+
+			i += 2
+		} else if b0 == '_' {
+			result = append(result, f1[fIndex])
+			i++
+			fIndex++
+		} else if b0 == '-' {
+			i++
+			fIndex++
 		}
-		//don't need a check for '-'. no action required
 	}
 	return result
 }
 
 //GenScript creates a delta script which stores the original byte string given the steps needed for the SES(shortest edit script)/LCS(longest common subsequence) to record the deltas.
-func GenScript(f1, f2 []byte, steps [][]int) []byte {
-	script :=[]byte{}
-
+func GenScript(f1, f2 []byte) []byte {
+	script := []byte{}
+	steps := Backtrack(f1, f2)
 	for i := len(steps) - 1; i >= 0; i-- {
-		var opData []byte
 		s := NewStep(steps[i])
-		if s.R == '+' {
-			opData = s.Op(f2[steps[i][1]])
-		} else {
-			opData = s.Op(f1[steps[i][0]])
-		}
 
-
-		script = append(script, opData...)
+		f2Index := steps[i][1]
+		opBytes := s.Operation(f2[f2Index])
+		script = append(script, opBytes...)
 	}
 
 	return script
@@ -54,22 +55,25 @@ func NewStep(step []int) Step {
 		xInc: step[0] < step[2],
 		yInc: step[1] < step[3],
 	}
-	s.R = s.OpRune()
+	s.R = s.opRune()
 	return s
 }
 
-func (s *Step) OpRune() rune {
+func (s *Step) opRune() rune {
 	if s.xInc && s.yInc {
-		return ' '
+		return '_'
 	} else if s.xInc {
 		return '-'
 	} else if s.yInc {
 		return '+'
 	}
-	return ' '
+	return '_'
 }
 
-func (s *Step) Op(data byte) []byte {
+func (s *Step) Operation(data byte) []byte {
 	b := []byte(string(s.R))
-	return []byte{b[0], data}
+	if s.R == '+' {
+		return []byte{b[0], data}
+	}
+	return b
 }

@@ -1,7 +1,10 @@
 package godiff
 
+var (
+	Backtrack = backtrack
+)
 
-func Backtrack(f1, f2 []byte) [][]int {
+func backtrack(f1, f2 []byte) [][]int {
 
 	//start at the end indices and backtrack
 	x := len(f1)
@@ -61,7 +64,7 @@ func Trace(f1, f2 []byte) [][]int {
 			vkp1 := revValue(v, k+1)
 			vkm1 := revValue(v, k-1)
 			if k == -d || (k != d && vkm1 < vkp1) {
-			//if k == -d || (k != d && v[k-1] < v[k+1]) {
+				//if k == -d || (k != d && v[k-1] < v[k+1]) {
 				//x = v[k+1]
 
 				//down
@@ -107,4 +110,3 @@ func revValue(array []int, index int) int {
 		return array[index]
 	}
 }
-
