@@ -1,12 +1,29 @@
 package godiff
 
-var (
-	scriptHeader = []byte{0xaa, 0x0f, 0xca, 0xab}
-)
+
+//RunScript takes a generated script from GenScript and returns the result with the deltas included
+func RunScript(s []byte) []byte {
+	var b0, b1 byte
+
+	result := []byte{}
+
+	for i := 0; i < len(s); i += 2 {
+		b0 = s[i]
+		b1 = s[i + 1]
+
+		if b0 == '+' {
+			result = append(result, b1)
+		} else if b0 == ' ' {
+			result = append(result, b1)
+		}
+		//don't need a check for '-'. no action required
+	}
+	return result
+}
 
 //GenScript creates a delta script which stores the original byte string given the steps needed for the SES(shortest edit script)/LCS(longest common subsequence) to record the deltas.
 func GenScript(f1, f2 []byte, steps [][]int) []byte {
-	script := append([]byte{}, scriptHeader...)
+	script :=[]byte{}
 
 	for i := len(steps) - 1; i >= 0; i-- {
 		var opData []byte

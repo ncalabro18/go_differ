@@ -15,9 +15,8 @@ func TestGenScript(t *testing.T) {
 	assert := assert.New(t)
 
 	script := GenScript([]byte(dataF1), []byte(dataF2), dataBacktrack)
-	scriptData := script[4:]
-	//t.Logf("\"%v\"\n", string(scriptData))
-	assert.Equal(scriptData, dataScript, "test script failed to match expected data")
+	//t.Logf("\"%v\"\n", string(script))
+	assert.Equal(script, dataScript, "test script failed to match expected data")
 }
 
 func TestRunScript(t *testing.T) {
