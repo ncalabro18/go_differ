@@ -1,6 +1,22 @@
-# Go Diff Algorithms
+# Go Diff Algorithm
 [![Build Status](https://travis-ci.com/ncalabro18/go_differ.svg?token=nA46L6ZRfhuqRxMq99Vv&branch=master)](https://travis-ci.com/ncalabro18/go_differ)
 [![codecov](https://codecov.io/gh/ncalabro18/go_differ/branch/main/graph/badge.svg?token=1PY2D2KDY3)](https://codecov.io/gh/ncalabro18/go_differ)
 
 An implementation of the Myers' Greedy Algorithm. In addition, there is a utility to quickly use edit scripts for recording deltas.
 
+### Example
+
+```go
+func main() {
+  f1 := []byte("ABCABBA")
+  f2 := []byte("CBABAC")
+  
+  d := godiff.NewDelta(f1, f2) //creates the delta script to convert f1 + d -> f2
+  scriptResult := d.F2() //runs the script, f1 is stored in Delta structure
+  fmt.Println(scriptResult)
+}
+```
+Output:
+```
+CBABAC
+```
