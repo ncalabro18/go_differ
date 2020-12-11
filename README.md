@@ -13,7 +13,7 @@ func main() {
   
   d := godiff.NewDelta(f1, f2) //creates the delta script to convert f1 + d -> f2
   scriptResult := d.F2() //runs the script, f1 is stored in Delta structure
-  fmt.Println(scriptResult)
+  fmt.Println(string(scriptResult))
 }
 ```
 Output:
