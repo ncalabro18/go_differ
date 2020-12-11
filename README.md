@@ -3,7 +3,10 @@
 [![codecov](https://codecov.io/gh/ncalabro18/go_differ/branch/main/graph/badge.svg?token=1PY2D2KDY3)](https://codecov.io/gh/ncalabro18/go_differ)
 
 An implementation of the Myers' Greedy Algorithm. In addition, there is a utility to quickly use edit scripts for recording deltas.
-
+### Install
+```
+go get github.com/ncalabro18/go_differ.git
+```
 ### Example
 
 ```go
