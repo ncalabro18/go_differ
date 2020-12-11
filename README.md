@@ -7,13 +7,18 @@ An implementation of the Myers' Greedy Algorithm. In addition, there is a utilit
 ### Example
 
 ```go
+import (
+	"fmt"
+	"github.com/ncalabro18/go_differ.git/godiff/v1"
+)
+
 func main() {
-  f1 := []byte("ABCABBA")
-  f2 := []byte("CBABAC")
-  
-  d := godiff.NewDelta(f1, f2) //creates the delta script to convert f1 + d -> f2
-  scriptResult := d.F2() //runs the script, f1 is stored in Delta structure
-  fmt.Println(string(scriptResult))
+	f1 := []byte("ABCABBA")
+	f2 := []byte("CBABAC")
+
+	d := godiff.NewDelta(f1, f2) //creates the delta script to convert f1 + d -> f2
+	scriptResult := d.F2()       //runs the script, f1 is stored in Delta structure
+	fmt.Println(string(scriptResult))
 }
 ```
 Output:
