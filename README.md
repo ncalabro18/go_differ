@@ -1,6 +1,6 @@
 # Go Diff Algorithm
 [![Build Status](https://travis-ci.com/ncalabro18/go_differ.svg?token=nA46L6ZRfhuqRxMq99Vv&branch=master)](https://travis-ci.com/ncalabro18/go_differ)
-[![codecov](https://codecov.io/gh/ncalabro18/go_differ/branch/main/graph/badge.svg?token=1PY2D2KDY3)](https://codecov.io/gh/ncalabro18/go_differ)
+[![codecov](https://codecov.io/gh/ncalabro18/go_differ/branch/master/graph/badge.svg?token=1PY2D2KDY3)](https://codecov.io/gh/ncalabro18/go_differ)
 
 An implementation of the Myers' Greedy Algorithm. In addition, there is a utility to quickly use edit scripts for recording deltas.
 ### Install
