@@ -1,4 +1,4 @@
-module github.com/ncalabro18/go_differ.git
+module github.com/ncalabro18/go_differ
 
 go 1.14
 
